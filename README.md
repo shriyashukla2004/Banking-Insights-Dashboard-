@@ -1,103 +1,65 @@
-🏦 Banking Insights Analysis
+# 📊 Banking Analytics Dashboard
 
-End-to-end analytics project that generates a relational banking dataset in SQL Server (~10k rows), injects realistic data-quality issues, and delivers a Power BI dashboard with core banking KPIs (financial health + customer/account insights).
+This project is an end-to-end data analysis and visualization solution for the banking domain. It integrates SQL, Power BI, and KPI-driven analytics to provide insights into customer behavior, transactions, and key financial performance indicators.
 
-🔍 What’s Inside
+🚀 Project Overview
 
-Data Generator (SQL): Creates 5 core tables with keys & relationships: Customers, Accounts, Branches, Transactions, Loans.
+Data Source: Banking transaction datasets (sample/test DB).
 
-Dirty Data Scenarios: Nulls, mixed date formats, numbers-as-text, duplicates, typos, case inconsistencies, orphaned FKs, and outliers—perfect for Power Query cleaning practice.
+SQL: Data cleaning, transformation, and feature engineering.
 
-Power BI Report (.pbix): Two pages of KPIs with cards/gauges/trend & branch comparisons, plus ready-to-use DAX measures.
+Power BI: Interactive dashboard with KPIs and trends.
 
-🧱 Data Model & Volume (Approx.)
+KPIs Implemented:
 
-Customers: ~2,000
+Customer Growth Rate
 
-Accounts: ~2,500
+Loan Approval Ratio
 
-Transactions: ~5,000
+Average Account Balance
 
-Loans: ~500
+Transaction Volume Trends
 
-Branches: ~25–50
+Net Profit Margin
 
-Relationships:
-Customers (1) ── (∞) Accounts
-Branches (1) ── (∞) Accounts
-Accounts (1) ── (∞) Transactions
-Customers (1) ── (∞) Loans and Accounts (1) ── (∞) Loans (with a few intentional orphans)
+📂 Repository Contents
 
-🗃️ Table Schemas (Example)
+/data → KPI descriptions and documentation in CSV format.
 
-Customers: CustomerID (PK), Name, Email, DOB, Gender, City, Phone, JoinDate
-Accounts: AccountID (PK), CustomerID (FK), BranchID (FK), AccountType, Status, OpenDate, Balance
-Branches: BranchID (PK), BranchName, City
-Transactions: TransactionID (PK), AccountID (FK), TransactionType, Amount, Date, Channel, (optional) InterestIncome, InterestExpense
-Loans: LoanID (PK), CustomerID (FK), AccountID (FK), LoanAmount, LoanStatus, InterestRate, StartDate, EndDate
+/sql → SQL scripts for data extraction and transformation.
 
-🧼 Deliberately Injected Data Issues
+/dashboard → Power BI dashboard file (.pbix).
 
-Nulls/Blanks: Email, Phone, Balance, AccountType
+/docs → Documentation and dashboard screenshots.
 
-Wrong Types: "ten" in numeric columns, balances as text
+⚡ Features
 
-Dates: Mixed MM/DD/YYYY and DD-MM-YYYY
+✅ SQL queries to extract and prepare banking data
+✅ Power BI dashboard with KPI visuals
+✅ DAX calculated columns & measures
+✅ Clean and structured KPI documentation
 
-Duplicates: Same customer name, different CustomerID
+🖼 Dashboard Preview
 
-Outliers: Negative balances/loan amounts, extreme transaction values
+(Add screenshots of the dashboard in /docs/screenshots/)
 
-Typos: “Depositt”, “withdrwal” in TransactionType
+🔧 How to Use
 
-Orphans: Loans.AccountID not present in Accounts
+Clone this repo:
 
-Casing: “mumbai” vs “Mumbai”
+git clone https://github.com/your-username/Banking-Analytics-Dashboard.git
 
-📊 KPIs & Visuals
 
-Page 1 – Financial Health (KPIs 1–5):
-Cards/Gauges + one trend: NIM, Loan-to-Deposit, NPL Ratio, Cost-to-Income, ROA
+Open the SQL scripts (/sql) and execute them on your banking database.
 
-Page 2 – Customers & Accounts (KPIs 6–10):
-Cards + Columns: Total Customers, Active Accounts, Total Deposits, Total Loan Amount, Branch-wise Revenue
+Open the Banking_Dashboard.pbix file in Power BI Desktop.
 
-🚀 Getting Started
+Connect the dashboard to your database / CSV files.
 
-SQL Server
+📌 Future Improvements
 
-Create a database (e.g., BankingSim).
+Automate SQL–Power BI integration
 
-Run the provided /sql/01_schema.sql (tables + constraints).
+Add Python scripts for advanced analytics (customer churn, fraud detection, etc.)
 
-Run /sql/02_seed_clean.sql (clean baseline data).
-
-Run /sql/03_inject_dirty.sql (data-quality issues for Power Query practice).
-
-Power BI Desktop
-
-Connect to SQL Server (BankingSim).
-
-Use Power Query to:
-
-Remove duplicates (Customers)
-
-Standardize casing (AccountType, City)
-
-Fix types & parse dates to a single format
-
-Replace erroneous values & flag nulls
-
-Identify & handle orphaned loans
-
-Load model, create relationships, add DAX, and build visuals using the report pages.
-
-✅ Learning Outcomes
-
-Model a banking relational schema with realistic constraints
-
-Practice Power Query data cleaning on messy, multi-table data
-
-Build finance-grade KPIs with DAX and intuitive Power BI visuals
-
-Validate data with SQL tests (duplicates, outliers)
+Deploy dashboard to Power BI Service
